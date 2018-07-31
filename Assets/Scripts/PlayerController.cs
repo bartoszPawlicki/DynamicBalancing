@@ -8,12 +8,22 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rigidbody;
     public float speedFactor;
 
+    [SerializeField]
+    private float startHealth;
+
+    [SerializeField]
+    private float maxHealth;
+
+    [SerializeField]
+    private float currentHealth;
+
     private float moveHorizontal = 0;
     private float moveVertical = 0;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        currentHealth = startHealth;
 
     }
 
@@ -35,5 +45,20 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void ReceiveHealing(float healthValue)
+    {
+        if (currentHealth < maxHealth)
+        {
+            if (currentHealth + healthValue > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            else
+            {
+                currentHealth += healthValue;
+            }
+        }
     }
 }
