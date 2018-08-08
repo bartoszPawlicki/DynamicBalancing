@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
-    private float startHealth;
+    protected float startHealth;
 
-    private float currentHealth;
+    protected float currentHealth;
 	void Start ()
     {
         currentHealth = startHealth;
