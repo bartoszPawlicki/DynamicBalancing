@@ -6,11 +6,12 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     protected float startHealth;
+    protected PlayerController playerController;
 
     protected float currentHealth;
 	void Start ()
     {
-        currentHealth = startHealth;
+        
 	}
 	
 	void Update ()

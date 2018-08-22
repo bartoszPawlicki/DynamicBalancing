@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FatEnemy : EnemyController
 {
-    private PlayerController playerController;
     public float speedFactor;
 	
 	void Start ()
