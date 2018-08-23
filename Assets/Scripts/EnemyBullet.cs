@@ -22,6 +22,10 @@ public class EnemyBullet : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(1);
             gameObject.SetActive(false);
         }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator DestroyBullet()

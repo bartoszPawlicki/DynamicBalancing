@@ -28,6 +28,10 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<EnemyController>().ReceiveDamage(1);
             gameObject.SetActive(false);
         }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator DestroyBullet()
