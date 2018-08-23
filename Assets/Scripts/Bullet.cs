@@ -13,8 +13,8 @@ public class Bullet : MonoBehaviour
        
 
 
-        Vector3 dir = direction.normalized + player.GetComponent<Rigidbody>().velocity/10;
-        Debug.Log(direction + " " + player.GetComponent<Rigidbody>().velocity);
+        Vector3 dir = direction.normalized + player.GetComponent<Rigidbody>().velocity/player.GetComponent<PlayerController>().maxSpeed;
+        //Debug.Log(direction + " " + player.GetComponent<Rigidbody>().velocity);
         
         GetComponent<Rigidbody>().AddForce(dir.normalized * bulletSpeed);
         
