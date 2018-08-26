@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour
 
     public List<DoorController> doors;
     public List<EnemyController> enemies;
+    public LevelController nextLevel;
 	void Start ()
     {
 
@@ -16,7 +17,24 @@ public class LevelController : MonoBehaviour
 	
 	void Update ()
     {
-		
+        if(!levelFinished)
+        {
+            bool allEnemiesDestroyed = true;
+            foreach (EnemyController enemy in enemies)
+            {
+                if (enemy.gameObject.activeSelf)
+                {
+                    allEnemiesDestroyed = false;
+                    break;
+                }
+            }
+
+            if (allEnemiesDestroyed)
+            {
+                FinishLevel();
+            }
+        }
+        
 	}
 
     public void StartLevel()
@@ -25,7 +43,7 @@ public class LevelController : MonoBehaviour
 
         foreach (DoorController door in doors)
         {
-            door.open = false;
+            door.CloseDoor();
         }
     }
 
@@ -35,7 +53,13 @@ public class LevelController : MonoBehaviour
 
         foreach (DoorController door in doors)
         {
-            door.open = true;
+            door.OpenDoor();
         }
+
+        foreach (DoorController door in nextLevel.doors)
+        {
+            door.OpenDoor();
+        }
+
     }
 }

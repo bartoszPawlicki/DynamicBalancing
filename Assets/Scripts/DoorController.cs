@@ -15,4 +15,15 @@ public class DoorController : MonoBehaviour
     {
 		
 	}
+
+    public void OpenDoor()
+    {
+        transform.position += Vector3.up * 3;
+        open = true;
+    }
+    public void CloseDoor()
+    {
+        transform.position += Vector3.down * 3;
+        open = false;
+    }
 }
