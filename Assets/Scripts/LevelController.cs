@@ -99,10 +99,5 @@ public class LevelController : MonoBehaviour
             door.OpenDoor();
         }
 
-        foreach (DoorController door in nextLevel.doors)
-        {
-            door.OpenDoor();
-        }
-
     }
 }
