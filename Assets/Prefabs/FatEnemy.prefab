@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 136885432830290108}
   - component: {fileID: 54981429990252686}
   - component: {fileID: 114517482803489382}
+  - component: {fileID: 114398506450496228}
   m_Layer: 0
   m_Name: FatEnemy
   m_TagString: Enemy
@@ -65,8 +66,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833726498974686}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.85}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.01, y: -0.9, z: -7.13}
   m_LocalScale: {x: 1.5, y: 0.9, z: 1.5}
   m_Children:
   - {fileID: 4293416825014074}
@@ -130,6 +131,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &114398506450496228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244679942134526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149006a1fddfcaf44ac07dddc352d4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0.9
 --- !u!114 &114517482803489382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 3
   speedFactor: 0.15
+  attackCooldown: {fileID: 114398506450496228}
 --- !u!136 &136885432830290108
 CapsuleCollider:
   m_ObjectHideFlags: 1

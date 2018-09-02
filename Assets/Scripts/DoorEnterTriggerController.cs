@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelStartTrigger : MonoBehaviour
+public class DoorEnterTriggerController : MonoBehaviour
 {
     public LevelController parentLevel;
-	void Start ()
+    void Start()
     {
-		
-	}
-	void Update ()
-    {
-		
-	}
 
-    void OnTriggerExit(Collider other)
+    }
+    void Update()
     {
-        if(other.gameObject.CompareTag("Player"))
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
             parentLevel.StartLevel();
         }

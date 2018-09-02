@@ -21,10 +21,14 @@ public class PlayerController : MonoBehaviour
     private float moveVertical = 0;
     public float maxSpeed;
 
+    private ParticleSystem damageParticles;
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startHealth;
+
+        damageParticles = GetComponentInChildren<ParticleSystem>();
 
     }
 
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damageValue;
 
+        damageParticles.Play();
         if (currentHealth <= 0)
         {
             gameObject.SetActive(false);

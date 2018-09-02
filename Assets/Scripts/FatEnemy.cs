@@ -5,21 +5,48 @@ using UnityEngine;
 public class FatEnemy : EnemyController
 {
     public float speedFactor;
-	
-	void Start ()
+    public Cooldown attackCooldown;
+
+    void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         currentHealth = startHealth;
+        attackCooldown.InitCooldown();
     }
-	
-	
-	void Update ()
+
+
+    void Update()
     {
+
     }
 
     void FixedUpdate()
     {
         Vector3 movement = transform.position + (playerController.gameObject.transform.position - transform.position).normalized * speedFactor;
         GetComponent<Rigidbody>().MovePosition(movement);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(attackCooldown.canUse)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                attackCooldown.startTimer();
+                collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(1);
+            }
+        }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (attackCooldown.canUse)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                attackCooldown.startTimer();
+                collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(1);
+            }
+        }
     }
 }

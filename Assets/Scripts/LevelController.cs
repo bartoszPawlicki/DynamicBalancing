@@ -7,12 +7,26 @@ public class LevelController : MonoBehaviour
     public bool levelStarted = false;
     public bool levelFinished = false;
 
+    public List<GameObject> walls;
     public List<DoorController> doors;
     public List<EnemyController> enemies;
+
+    public List<GameObject> levelContents;
+
+
     public LevelController nextLevel;
+
 	void Start ()
     {
+        //foreach (GameObject go in transform.GetChild(0).transform.ge)
+        //{
+        //    walls.Add(go);
+        //}
 
+        foreach (DoorController door in doors)
+        {
+            door.gameObject.GetComponentInChildren<DoorEnterTriggerController>().parentLevel = this;
+        }
     }
 	
 	void Update ()
