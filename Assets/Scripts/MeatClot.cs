@@ -19,25 +19,29 @@ public class MeatClot : EnemyController
         shootCooldown.InitCooldown();
         Debug.Log(movementCooldown.name);
     }
-	
-	void Update ()
+
+    void Update ()
     {
-		
+        
 	}
 
     void FixedUpdate()
     {
-        if (movementCooldown.canUse)
+        if(transform.parent.GetComponentInParent<LevelController>().delayOnLevelStartFinished)
         {
-            movementCooldown.startTimer();
-            //Vector3 movement = transform.position + (transform.position + new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)) - transform.position).normalized * speedFactor;
-            //GetComponent<Rigidbody>().MovePosition(movement);
-            GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * speedFactor);
+            if (movementCooldown.canUse)
+            {
+                movementCooldown.startTimer();
+                //Vector3 movement = transform.position + (transform.position + new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)) - transform.position).normalized * speedFactor;
+                //GetComponent<Rigidbody>().MovePosition(movement);
+                GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * speedFactor);
+            }
+            if (shootCooldown.canUse)
+            {
+                Shoot();
+            }
         }
-        if(shootCooldown.canUse)
-        {
-            Shoot();
-        }
+        
     }
 
     void Shoot()

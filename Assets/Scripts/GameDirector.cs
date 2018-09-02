@@ -8,7 +8,7 @@ public class GameDirector : MonoBehaviour
     
 	void Start ()
     {
-        startingLevel.StartLevel();
+        startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
 	}
 	
 	void Update ()

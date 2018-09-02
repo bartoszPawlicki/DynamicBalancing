@@ -5,8 +5,17 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     public bool open = false;
-    
-	void Start ()
+    public LevelController parentLevel;
+    public DoorController nextRoomDoor;
+
+    public enum DoorLocation
+    {
+        UP, DOWN, LEFT, RIGHT
+    }
+
+    public DoorLocation doorLocation;
+
+    void Start ()
     {
 		
 	}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DoorEnterTriggerController : MonoBehaviour
 {
-    public LevelController parentLevel;
+    
+    
     void Start()
     {
 
@@ -18,7 +19,7 @@ public class DoorEnterTriggerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            parentLevel.StartLevel();
+            GetComponentInParent<DoorController>().nextRoomDoor.parentLevel.StartLevel(GetComponentInParent<DoorController>().doorLocation);
         }
     }
 }

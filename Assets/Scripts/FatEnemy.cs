@@ -22,8 +22,12 @@ public class FatEnemy : EnemyController
 
     void FixedUpdate()
     {
-        Vector3 movement = transform.position + (playerController.gameObject.transform.position - transform.position).normalized * speedFactor;
-        GetComponent<Rigidbody>().MovePosition(movement);
+        if (transform.parent.GetComponentInParent<LevelController>().delayOnLevelStartFinished)
+        {
+            Vector3 movement = transform.position + (playerController.gameObject.transform.position - transform.position).normalized * speedFactor;
+            GetComponent<Rigidbody>().MovePosition(movement);
+        }
+            
     }
 
     void OnCollisionEnter(Collision collision)
