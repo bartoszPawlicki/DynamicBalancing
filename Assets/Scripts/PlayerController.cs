@@ -23,13 +23,15 @@ public class PlayerController : MonoBehaviour
 
     private ParticleSystem damageParticles;
 
+    private UberCanvasScript canvas;
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startHealth;
 
         damageParticles = GetComponentInChildren<ParticleSystem>();
-
+        canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>();
     }
 
     void Update()
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour
                 currentHealth += healthValue;
             }
         }
+        canvas.healthText.text = currentHealth.ToString();
     }
 
     public void ReceiveDamage(float damageValue)
@@ -90,6 +93,8 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        canvas.healthText.text = currentHealth.ToString();
+        Debug.Log(currentHealth);
     }
 
 }

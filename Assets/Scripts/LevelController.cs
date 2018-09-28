@@ -19,6 +19,8 @@ public class LevelController : MonoBehaviour
     public bool delayOnLevelStartFinished = false;
     public float delayOnLevelStartFinishedTimer = 2f;
 
+    public List<GameObject> rewardPrefabs;
+
 	void Start ()
     {
         foreach (DoorController door in doors)
@@ -93,11 +95,19 @@ public class LevelController : MonoBehaviour
     public void FinishLevel()
     {
         levelFinished = true;
+        SpawnEndLevelReward();
 
         foreach (DoorController door in doors)
         {
             door.OpenDoor();
         }
 
+    }
+
+    public void SpawnEndLevelReward()
+    {
+        int rand = Random.Range(0, rewardPrefabs.Count);
+        GameObject go = Instantiate(rewardPrefabs[rand], transform);
+        go.transform.localPosition = new Vector3(0, -0.8f, 0);
     }
 }
