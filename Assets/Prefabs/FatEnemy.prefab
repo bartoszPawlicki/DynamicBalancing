@@ -155,8 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 3
+  balancingSystem: {fileID: 0}
   speedFactor: 0.15
   attackCooldown: {fileID: 114398506450496228}
+  isChasing: 0
+  chasingTotalTime: 4
+  chasingTimer: 0
 --- !u!136 &136885432830290108
 CapsuleCollider:
   m_ObjectHideFlags: 1

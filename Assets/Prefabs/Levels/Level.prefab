@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 64182997508871538}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1541,6 +1541,9 @@ MonoBehaviour:
   delayOnLevelStartFinishedTimer: 1
   rewardPrefabs:
   - {fileID: 1348794164752346, guid: 11859d9ca0fa4cc44ba3fd90378c87f9, type: 2}
+  - {fileID: 1402767633301960, guid: 4de987dc9fd488441a667b7e969ed0e7, type: 2}
+  - {fileID: 1058128048262928, guid: b7b012273f6225b4480a21ef581618fe, type: 2}
+  balancingSystem: {fileID: 0}
 --- !u!114 &114340976146592744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1641,6 +1644,9 @@ MonoBehaviour:
   balancingSystem: {fileID: 0}
   speedFactor: 0.15
   attackCooldown: {fileID: 114340976146592744}
+  isChasing: 0
+  chasingTotalTime: 4
+  chasingTimer: 0
 --- !u!114 &114671795047645314
 MonoBehaviour:
   m_ObjectHideFlags: 1
