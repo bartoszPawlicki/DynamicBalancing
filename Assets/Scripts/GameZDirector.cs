@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameDirector : MonoBehaviour
+public class GameZDirector : MonoBehaviour
 {
     public LevelController startingLevel;
     

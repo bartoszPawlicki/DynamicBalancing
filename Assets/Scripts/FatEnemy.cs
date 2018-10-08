@@ -28,6 +28,12 @@ public class FatEnemy : EnemyController
         //attackCooldown.InitCooldown();
     }
 
+    private void OnEnable()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
+    }
+
     public override void DifficultyUpdate()
     {
         startHealth = balancingSystem.difficultyLevel.meatClothHealth;

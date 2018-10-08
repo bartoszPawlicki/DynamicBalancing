@@ -49,7 +49,7 @@ public class UberCanvasScript : MonoBehaviour
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.easy);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
         
         
@@ -60,7 +60,7 @@ public class UberCanvasScript : MonoBehaviour
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.medium);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
     }
 
@@ -69,7 +69,7 @@ public class UberCanvasScript : MonoBehaviour
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.hard);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
     }
 

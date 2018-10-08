@@ -11,6 +11,13 @@ public class LevelController : MonoBehaviour
     public List<DoorController> doors;
     public List<EnemyController> enemies;
 
+    public List<GameObject> enemiesPrefabs;
+
+    public ObjectPool meatClotPool;
+    public ObjectPool fatEnemyPool;
+    public List<float> weights = new List<float>() { 0.8f, 0.2f };
+    public int enemiesCount = 5;
+
     public List<GameObject> levelContents;
 
 
@@ -23,6 +30,8 @@ public class LevelController : MonoBehaviour
 
     public BalancingSystem balancingSystem;
 
+    public List<Transform> spawnPoints;
+
 	void Start ()
     {
         foreach (DoorController door in doors)
@@ -30,6 +39,30 @@ public class LevelController : MonoBehaviour
             door.parentLevel = this;
         }
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
+    }
+
+    public void SpawnRandomEnemies()
+    {
+        for (int i=0; i<enemiesCount; i++)
+        {
+            int rand = BalancingSystem.RandomWithWeight(weights);
+
+            if(rand == 0)
+            {
+                GameObject enemy = meatClotPool.PoolNext(spawnPoints[0].position);
+                spawnPoints.RemoveAt(0);
+                enemy.transform.parent = transform.Find("Enemies");
+                enemies.Add(enemy.GetComponentInChildren<MeatClot>());
+            }
+            else if(rand == 1)
+            {
+                GameObject enemy = fatEnemyPool.PoolNext(spawnPoints[0].position);
+                spawnPoints.RemoveAt(0);
+                enemy.transform.parent = transform.Find("Enemies");
+                enemies.Add(enemy.GetComponentInChildren<FatEnemy>());
+            }
+        }
+        
     }
 	
 	void Update ()
@@ -46,7 +79,7 @@ public class LevelController : MonoBehaviour
                 }
             }
 
-            if (allEnemiesDestroyed)
+            if (allEnemiesDestroyed && levelStarted)
             {
                 FinishLevel();
             }
@@ -65,7 +98,7 @@ public class LevelController : MonoBehaviour
 
     public void StartLevel(DoorController.DoorLocation exitDoorLocation)
     {
-        
+        SpawnRandomEnemies();
         levelStarted = true;
         
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamera>().MoveCameraToPosition(transform.position - GlobalConstants.CameraLevelOffset);
