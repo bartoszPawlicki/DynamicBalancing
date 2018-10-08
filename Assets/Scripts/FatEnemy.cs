@@ -15,7 +15,6 @@ public class FatEnemy : EnemyController
 
     void Start()
     {
-
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
         chasingTimer = chasingTotalTime;
@@ -27,10 +26,6 @@ public class FatEnemy : EnemyController
         //attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
 
         //attackCooldown.InitCooldown();
-
-
-
-
     }
 
     public override void DifficultyUpdate()
@@ -43,6 +38,7 @@ public class FatEnemy : EnemyController
         attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
 
         attackCooldown.InitCooldown();
+        
     }
 
 

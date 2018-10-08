@@ -124,8 +124,12 @@ public class LevelController : MonoBehaviour
 
     public void SpawnEndLevelReward()
     {
-        int rand = Random.Range(0, rewardPrefabs.Count);
-        GameObject go = Instantiate(rewardPrefabs[rand], transform);
+        List<float> list = new List<float>() { 0.7f, 0.2f, 0.1f };
+        
+
+        //int rand = Random.Range(0, rewardPrefabs.Count);
+
+        GameObject go = Instantiate(rewardPrefabs[BalancingSystem.RandomWithWeight(list)], transform);
         go.transform.localPosition = new Vector3(0, -0.8f, 0);
     }
 }

@@ -174,4 +174,20 @@ public class BalancingSystem : MonoBehaviour
     {
 		
 	}
+    
+    public static int RandomWithWeight(List<float> weights)
+    {
+        float rand = Random.Range(0f, 1f);
+        float totalWeights = 0;
+
+        for (int i=0; i<weights.Count; i++)
+        {
+            totalWeights += weights[i];
+            if (rand <= totalWeights)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
