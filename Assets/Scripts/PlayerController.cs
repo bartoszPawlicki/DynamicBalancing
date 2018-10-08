@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float maxHealth;
 
     [SerializeField]
-    private float currentHealth;
+    public float currentHealth;
 
     private float moveHorizontal = 0;
     private float moveVertical = 0;

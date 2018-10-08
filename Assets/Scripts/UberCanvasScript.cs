@@ -9,8 +9,9 @@ public class UberCanvasScript : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI accucaryText;
+    public TextMeshProUGUI gradeText;
 
-    private float startTime;
+    public float startTime;
     private float currentTime;
 
     public int bulletsShot = 0;

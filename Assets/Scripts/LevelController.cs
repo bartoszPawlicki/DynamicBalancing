@@ -21,12 +21,15 @@ public class LevelController : MonoBehaviour
 
     public List<GameObject> rewardPrefabs;
 
+    public BalancingSystem balancingSystem;
+
 	void Start ()
     {
         foreach (DoorController door in doors)
         {
             door.parentLevel = this;
         }
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
     }
 	
 	void Update ()
@@ -93,12 +96,15 @@ public class LevelController : MonoBehaviour
             {
                 door.CloseDoor();
             }
+            balancingSystem.StartGrading();
         }
 
         foreach (EnemyController ec in enemies)
         {
             ec.DifficultyUpdate();
         }
+
+        
 
     }
 
@@ -111,6 +117,8 @@ public class LevelController : MonoBehaviour
         {
             door.OpenDoor();
         }
+
+        balancingSystem.EndGrading();
 
     }
 

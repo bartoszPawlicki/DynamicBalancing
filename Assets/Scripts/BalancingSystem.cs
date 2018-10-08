@@ -17,6 +17,8 @@ public class BalancingSystem : MonoBehaviour
     public DifficultyLevel difficultyLevel;
     public Difficulty difficulty;
 
+    private PlayerController playerController;
+
 
 
 	void Start ()
@@ -26,6 +28,7 @@ public class BalancingSystem : MonoBehaviour
         hard = new Hard();
 
         difficultyLevel = medium;
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
     }
 
@@ -105,10 +108,65 @@ public class BalancingSystem : MonoBehaviour
                 break;
         }
     }
-	
-    void UpdateGameToMatchGrade()
-    {
 
+    public float startTime;
+    public float startAccuracy;
+    public float startHealth;
+
+    public float endTime;
+    public float endAccuracy;
+    public float endHealth;
+
+
+
+    public void StartGrading()
+    {
+        startTime = Time.time - GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().startTime;
+        this.startAccuracy = startAccuracy;
+
+        startHealth = playerController.currentHealth;
+    }
+
+    public void EndGrading()
+    {
+        this.endAccuracy = endAccuracy;
+        endHealth = playerController.currentHealth;
+
+        endTime = Time.time;
+
+        GradePlayer();
+    }
+
+    public void GradePlayer()
+    {
+        float gradeDelta = 0;
+
+        switch (difficulty)
+        {
+            case Difficulty.easy:
+                gradeDelta += ((endHealth - startHealth)*0.4f);
+
+
+
+                break;
+
+            case Difficulty.medium:
+                gradeDelta += ((endHealth - startHealth) * 0.5f);
+
+                break;
+
+            case Difficulty.hard:
+                gradeDelta += ((endHealth - startHealth) * 1f);
+
+                break;
+        }
+
+        if (gradeDelta <= -1)
+        {
+            GradeDown();
+        }
+
+        GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
     }
 
 	void Update ()
