@@ -18,21 +18,25 @@ public class PlayerWeapon : MonoBehaviour
     
     void Update()
     {
-        if(cooldown.canUse)
+        if(!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked)
         {
-            shootHorizontal = Input.GetAxis("HorizontalShoot");
-            shootVertical = Input.GetAxis("VerticalShoot");
-
-            if (shootHorizontal != 0)
+            if (cooldown.canUse)
             {
-                Shoot(new Vector3(shootHorizontal, 0, 0));
-            }
+                shootHorizontal = Input.GetAxis("HorizontalShoot");
+                shootVertical = Input.GetAxis("VerticalShoot");
 
-            else if (shootVertical != 0)
-            {
-                Shoot(new Vector3(0, 0, shootVertical));
+                if (shootHorizontal != 0)
+                {
+                    Shoot(new Vector3(shootHorizontal, 0, 0));
+                }
+
+                else if (shootVertical != 0)
+                {
+                    Shoot(new Vector3(0, 0, shootVertical));
+                }
             }
         }
+        
         
 
     }

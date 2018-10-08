@@ -51,9 +51,10 @@ public class LevelController : MonoBehaviour
         if(levelStarted)
         {
             delayOnLevelStartFinishedTimer -= Time.deltaTime;
-            if(delayOnLevelStartFinishedTimer <= 0)
+            if(delayOnLevelStartFinishedTimer <= 0 && !delayOnLevelStartFinished)
             {
                 delayOnLevelStartFinished = true;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked = false;
             }
         }
         
@@ -61,16 +62,10 @@ public class LevelController : MonoBehaviour
 
     public void StartLevel(DoorController.DoorLocation exitDoorLocation)
     {
+        
         levelStarted = true;
-
-        foreach (DoorController door in doors)
-        {
-            door.CloseDoor();
-        }
-
+        
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamera>().MoveCameraToPosition(transform.position - GlobalConstants.CameraLevelOffset);
-
-
         Vector3 teleportPosition = Vector3.zero;
 
         switch (exitDoorLocation)
@@ -90,7 +85,17 @@ public class LevelController : MonoBehaviour
         }
         
         GameObject.FindGameObjectWithTag("Player").transform.position = teleportPosition;
-    }
+
+        if (!levelFinished)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked = true;
+            foreach (DoorController door in doors)
+            {
+                door.CloseDoor();
+            }
+        }
+
+        }
 
     public void FinishLevel()
     {

@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     protected float startHealth;
     protected PlayerController playerController;
+    
+    public BalancingSystem balancingSystem;
 
     protected float currentHealth;
 	void Start ()

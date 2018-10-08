@@ -9,24 +9,43 @@ public class BalancingSystem : MonoBehaviour
         easy, medium, hard
     }
     public int grade;
+
+    public Easy easy;
+    public Medium medium;
+    public Hard hard;
+
+    public DifficultyLevel difficultyLevel;
     public Difficulty difficulty;
+
 
 
 	void Start ()
     {
-		switch(difficulty)
+        easy = new Easy();
+        medium = new Medium();
+        hard = new Hard();
+	}
+
+    public void InitWithDifficulty(Difficulty difficulty)
+    {
+        this.difficulty = difficulty;
+
+        switch (difficulty)
         {
             case Difficulty.easy:
                 grade = 3;
+                difficultyLevel = easy;
                 break;
             case Difficulty.medium:
+                difficultyLevel = medium;
                 grade = 6;
                 break;
             case Difficulty.hard:
+                difficultyLevel = hard;
                 grade = 9;
                 break;
         }
-	}
+    }
 
     void GradeUp()
     {

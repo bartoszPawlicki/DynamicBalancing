@@ -12,17 +12,20 @@ public class MeatClot : EnemyController
     void Start ()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
         currentHealth = startHealth;
 
         
+
+
         movementCooldown.InitCooldown();
         shootCooldown.InitCooldown();
-        Debug.Log(movementCooldown.name);
+        
     }
 
     void Update ()
     {
-        
+
 	}
 
     void FixedUpdate()

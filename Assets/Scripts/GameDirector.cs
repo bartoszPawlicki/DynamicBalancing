@@ -8,9 +8,14 @@ public class GameDirector : MonoBehaviour
     
 	void Start ()
     {
-        startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+        
 
 	}
+
+    public void StartGame()
+    {
+        startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+    }
 	
 	void Update ()
     {

@@ -24,9 +24,13 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem damageParticles;
 
     private UberCanvasScript canvas;
+    public BalancingSystem balancingSystem;
+
+    public bool locked = true;
 
     void Start()
     {
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
         rigidbody = GetComponent<Rigidbody>();
         currentHealth = startHealth;
 
@@ -41,31 +45,32 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-
-
-        if (moveHorizontal != 0 || moveVertical != 0)
+        if (!locked)
         {
-            //Vector3 movement = transform.position + new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
-            //rigidbody.MovePosition(movement);
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
 
-            //GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * speedFactor);
 
-            //mathf.clamp(forceadded, min, max);
-            //Vector3 movement = transform.position + new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
-
-            //rigidbody.AddForce(Mathf.Clamp(moveHorizontal * speedFactor, -20, 20), 0, Mathf.Clamp(moveVertical * speedFactor, -20, 20));
-            rigidbody.velocity += new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
-            if (rigidbody.velocity.magnitude > maxSpeed)
+            if (moveHorizontal != 0 || moveVertical != 0)
             {
-                rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+                //Vector3 movement = transform.position + new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
+                //rigidbody.MovePosition(movement);
+
+                //GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized * speedFactor);
+
+                //mathf.clamp(forceadded, min, max);
+                //Vector3 movement = transform.position + new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
+
+                //rigidbody.AddForce(Mathf.Clamp(moveHorizontal * speedFactor, -20, 20), 0, Mathf.Clamp(moveVertical * speedFactor, -20, 20));
+                rigidbody.velocity += new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
+                if (rigidbody.velocity.magnitude > maxSpeed)
+                {
+                    rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+                }
+                //rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, maxSpeed);
+
             }
-            //rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, maxSpeed);
-
         }
-
-
     }
 
     public void ReceiveHealing(float healthValue)

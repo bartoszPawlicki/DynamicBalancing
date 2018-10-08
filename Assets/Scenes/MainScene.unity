@@ -2724,6 +2724,8 @@ MonoBehaviour:
   accucaryText: {fileID: 1282388247}
   bulletsShot: 0
   bulletsHit: 0
+  mainMenu: {fileID: 0}
+  timerStarted: 0
 --- !u!114 &909372466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4424,7 +4426,7 @@ GameObject:
   - component: {fileID: 1738288783}
   m_Layer: 0
   m_Name: GameDirector
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

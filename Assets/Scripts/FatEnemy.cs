@@ -7,11 +7,16 @@ public class FatEnemy : EnemyController
     public float speedFactor;
     public Cooldown attackCooldown;
 
+    
+
     void Start()
     {
+
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         currentHealth = startHealth;
         attackCooldown.InitCooldown();
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
+
     }
 
 
