@@ -9,6 +9,9 @@ public class MeatClot : EnemyController
     public Cooldown shootCooldown;
     public ObjectPool bulletPool;
 
+    public List<float> moveProbability;
+    
+
     void Start ()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -42,9 +45,12 @@ public class MeatClot : EnemyController
 
         shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meathClothShootCooldown;
         movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
+        
 
         movementCooldown.InitCooldown();
         shootCooldown.InitCooldown();
+
+        moveProbability = balancingSystem.difficultyLevel.moveProbability;
     }
 
     void Update ()
@@ -66,7 +72,7 @@ public class MeatClot : EnemyController
             if (shootCooldown.canUse)
             {
                 
-                int rand = Random.Range(0, 2);
+                int rand = BalancingSystem.RandomWithWeight(moveProbability);
                 if (rand == 0)
                 {
                     Shoot();

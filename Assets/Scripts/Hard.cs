@@ -17,9 +17,13 @@ public class Hard : DifficultyLevel
         meatClothSpeedFactor = 900;
         meatClothMoveCooldown = 1.3f;
         meathClothShootCooldown = 1.7f;
+        moveProbability = new List<float>() { 0.8f, 0.2f };
 
         fatEnemyHealth = 4;
         fatEnemySpeedFactor = 0.16f;
         fatEnemyAttackInterval = 0.5f;
+        chaseTime = 3f;
+        restTime = 1f;
+        dashProbability = new List<float>() { 0.8f, 0.2f };
     }
 }

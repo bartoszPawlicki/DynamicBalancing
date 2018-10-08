@@ -7,17 +7,19 @@ public class FatEnemy : EnemyController
     public float speedFactor;
     public Cooldown attackCooldown;
     public bool isChasing = true;
-
-    public float chasingTotalTime = 4f;
+    
     public float chasingTimer;
 
-    
+    public float chaseTime;
+    public float restTime;
 
+    public List<float> dashProbability;
+    
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
-        chasingTimer = chasingTotalTime;
+        
         //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
         //currentHealth = startHealth;
 
@@ -26,6 +28,8 @@ public class FatEnemy : EnemyController
         //attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
 
         //attackCooldown.InitCooldown();
+
+        
     }
 
     private void OnEnable()
@@ -44,7 +48,14 @@ public class FatEnemy : EnemyController
         attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
 
         attackCooldown.InitCooldown();
-        
+
+        chaseTime = balancingSystem.difficultyLevel.chaseTime;
+        restTime = balancingSystem.difficultyLevel.restTime;
+
+        chasingTimer = chaseTime;
+
+        dashProbability = balancingSystem.difficultyLevel.dashProbability;
+
     }
 
 
@@ -64,7 +75,17 @@ public class FatEnemy : EnemyController
             {
                 isChasing = false;
                 chasingTimer = 2f;
-                ConfusionDash();
+
+                int rand = BalancingSystem.RandomWithWeight(dashProbability);
+                if(rand == 0)
+                {
+                    ForwardDash();
+                }
+                else if (rand == 1)
+                {
+                    ConfusionDash();
+                }
+                
             }
             
         }
@@ -75,7 +96,7 @@ public class FatEnemy : EnemyController
             if (chasingTimer < 0)
             {
                 isChasing = true;
-                chasingTimer = chasingTotalTime;
+                chasingTimer = chaseTime;
             }
         }
     }
@@ -121,5 +142,10 @@ public class FatEnemy : EnemyController
     void ConfusionDash()
     {
         GetComponent<Rigidbody>().AddForce(transform.position + (playerController.gameObject.transform.position - transform.position).normalized * -1100);
+    }
+
+    void ForwardDash()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.position + (playerController.gameObject.transform.position - transform.position).normalized * 900);
     }
 }

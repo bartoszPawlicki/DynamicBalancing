@@ -18,6 +18,7 @@ public class UberCanvasScript : MonoBehaviour
     public int bulletsHit = 0;
 
     public GameObject mainMenu;
+    public GameObject gameOverMenu;
     public BalancingSystem balancingSystem;
 
     public bool timerStarted = false;
@@ -48,6 +49,7 @@ public class UberCanvasScript : MonoBehaviour
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.easy);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeapon>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
@@ -59,6 +61,7 @@ public class UberCanvasScript : MonoBehaviour
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.medium);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeapon>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
@@ -68,6 +71,7 @@ public class UberCanvasScript : MonoBehaviour
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.hard);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWeapon>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameZDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
@@ -78,5 +82,10 @@ public class UberCanvasScript : MonoBehaviour
         timerStarted = true;
         startTime = Time.time;
         accucaryText.text = "100%";
+    }
+
+    public void GameOver()
+    {
+
     }
 }

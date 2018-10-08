@@ -17,9 +17,13 @@ public class Easy : DifficultyLevel
         meatClothSpeedFactor = 650;
         meatClothMoveCooldown = 2.5f;
         meathClothShootCooldown = 3f;
+        moveProbability = new List<float>() { 0.2f, 0.8f };
 
         fatEnemyHealth = 2;
         fatEnemySpeedFactor = 0.12f;
         fatEnemyAttackInterval = 2f;
+        chaseTime = 1.5f;
+        restTime = 1.5f;
+        dashProbability = new List<float>() { 0.2f, 0.8f };
     }
 }

@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             gameObject.SetActive(false);
         }
         canvas.healthText.text = currentHealth.ToString();
-        Debug.Log(currentHealth);
+        
     }
 
     

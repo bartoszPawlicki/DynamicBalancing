@@ -15,9 +15,13 @@ public abstract class DifficultyLevel
     public float meatClothSpeedFactor = 800;
     public float meatClothMoveCooldown = 1.5f;
     public float meathClothShootCooldown = 2f;
+    public List<float> moveProbability = new List<float>() { 0.5f, 0.5f };
 
     public int fatEnemyHealth = 3;
     public float fatEnemySpeedFactor = 0.15f;
     public float fatEnemyAttackInterval = 0.9f;
+    public float chaseTime = 2f;
+    public float restTime = 2f;
+    public List<float> dashProbability = new List<float>() { 0.5f, 0.5f };
 
 }

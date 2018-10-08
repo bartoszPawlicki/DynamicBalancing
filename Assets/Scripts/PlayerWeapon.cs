@@ -8,6 +8,7 @@ public class PlayerWeapon : MonoBehaviour
     public ObjectPool rocketPool;
     public Cooldown cooldown;
     public Cooldown rocketCooldown;
+    public BalancingSystem balancingSystem;
 
     float shootHorizontal = 0;
     float shootVertical = 0;
@@ -17,6 +18,15 @@ public class PlayerWeapon : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
+        cooldown.InitCooldown();
+        rocketCooldown.InitCooldown();
+    }
+
+    public void UpdateDifficulty()
+    {
+        cooldown.cooldownTime = balancingSystem.difficultyLevel.attackCooldown;
+
         cooldown.InitCooldown();
         rocketCooldown.InitCooldown();
     }
