@@ -16,15 +16,13 @@ public class Medium : DifficultyLevel
         meatClothHealth = 3;
         meatClothSpeedFactor = 800;
         meatClothMoveCooldown = 1.5f;
-        meathClothShootCooldown = 2f;
-        moveProbability = new List<float>() { 0.5f, 0.5f };
+        meatClothShootCooldown = 2f;
 
         fatEnemyHealth = 3;
         fatEnemySpeedFactor = 0.15f;
         fatEnemyAttackInterval = 0.9f;
         chaseTime = 2f;
         restTime = 2f;
-        dashProbability = new List<float>() { 0.5f, 0.5f };
     }
     
 }

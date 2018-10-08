@@ -44,11 +44,11 @@ public class BalancingSystem : MonoBehaviour
                 break;
             case Difficulty.medium:
                 difficultyLevel = medium;
-                grade = 6;
+                grade = 7;
                 break;
             case Difficulty.hard:
                 difficultyLevel = hard;
-                grade = 9;
+                grade = 11;
                 break;
         }
         GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
@@ -60,20 +60,20 @@ public class BalancingSystem : MonoBehaviour
         {
             case Difficulty.easy:
                 
-                if (grade >= 1 && grade < 4)
+                if (grade >= 1 && grade < 5)
                 {
                     grade++;
                 }
 
                 break;
             case Difficulty.medium:
-                if (grade >= 4 && grade < 7)
+                if (grade >= 5 && grade < 9)
                 {
                     grade++;
                 }
                 break;
             case Difficulty.hard:
-                if (grade >= 7 && grade < 10)
+                if (grade >= 9 && grade < 13)
                 {
                     grade++;
                 }
@@ -89,20 +89,20 @@ public class BalancingSystem : MonoBehaviour
         {
             case Difficulty.easy:
 
-                if (grade > 1 && grade <= 4)
+                if (grade > 1 && grade <= 5)
                 {
                     grade--;
                 }
 
                 break;
             case Difficulty.medium:
-                if (grade > 4 && grade <= 7)
+                if (grade > 5 && grade <= 9)
                 {
                     grade--;
                 }
                 break;
             case Difficulty.hard:
-                if (grade > 7 && grade <= 10)
+                if (grade > 9 && grade <= 13)
                 {
                     grade--;
                 }
@@ -146,14 +146,11 @@ public class BalancingSystem : MonoBehaviour
         {
             case Difficulty.easy:
                 gradeDelta += ((endHealth - startHealth)*0.4f);
-
-
-
+                
                 break;
 
             case Difficulty.medium:
                 gradeDelta += ((endHealth - startHealth) * 0.5f);
-
                 break;
 
             case Difficulty.hard:
@@ -165,6 +162,10 @@ public class BalancingSystem : MonoBehaviour
         if (gradeDelta <= -1)
         {
             GradeDown();
+        }
+        if (gradeDelta == 0)
+        {
+            GradeUp();
         }
 
         GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
@@ -178,6 +179,7 @@ public class BalancingSystem : MonoBehaviour
     public static int RandomWithWeight(List<float> weights)
     {
         float rand = Random.Range(0f, 1f);
+        Debug.Log(rand);
         float totalWeights = 0;
 
         for (int i=0; i<weights.Count; i++)

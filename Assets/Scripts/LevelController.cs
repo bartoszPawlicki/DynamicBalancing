@@ -15,7 +15,7 @@ public class LevelController : MonoBehaviour
 
     public ObjectPool meatClotPool;
     public ObjectPool fatEnemyPool;
-    public List<float> weights = new List<float>() { 0.8f, 0.2f };
+    public List<float> enemySpawnWeights = new List<float>() { 0.8f, 0.2f };
     public int enemiesCount = 5;
 
     public List<GameObject> levelContents;
@@ -43,9 +43,27 @@ public class LevelController : MonoBehaviour
 
     public void SpawnRandomEnemies()
     {
+        switch (balancingSystem.difficulty)
+        {
+            case BalancingSystem.Difficulty.easy:
+                float spawnWeight = ((balancingSystem.grade) * 0.02f);
+                enemySpawnWeights = new List<float>() { 1f - spawnWeight, spawnWeight };
+                break;
+
+            case BalancingSystem.Difficulty.medium:
+                float spawnWeight2 = ((balancingSystem.grade ) * 0.04f - 0.1f);
+                enemySpawnWeights = new List<float>() { 1f - spawnWeight2, spawnWeight2 };
+                break;
+
+            case BalancingSystem.Difficulty.hard:
+                float spawnWeight3 = ((balancingSystem.grade) * 0.04f - 0.1f);
+                enemySpawnWeights = new List<float>() { 1f - spawnWeight3, spawnWeight3 };
+                break;
+        }
+
         for (int i=0; i<enemiesCount; i++)
         {
-            int rand = BalancingSystem.RandomWithWeight(weights);
+            int rand = BalancingSystem.RandomWithWeight(enemySpawnWeights);
 
             if(rand == 0)
             {
@@ -98,7 +116,7 @@ public class LevelController : MonoBehaviour
 
     public void StartLevel(DoorController.DoorLocation exitDoorLocation)
     {
-        SpawnRandomEnemies();
+        
         levelStarted = true;
         
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamera>().MoveCameraToPosition(transform.position - GlobalConstants.CameraLevelOffset);
@@ -124,6 +142,7 @@ public class LevelController : MonoBehaviour
 
         if (!levelFinished)
         {
+            SpawnRandomEnemies();
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked = true;
             foreach (DoorController door in doors)
             {
@@ -157,12 +176,37 @@ public class LevelController : MonoBehaviour
 
     public void SpawnEndLevelReward()
     {
-        List<float> list = new List<float>() { 0.7f, 0.2f, 0.1f };
-        
+        List<float> endRewardWeights = new List<float>() { 0.7f, 0.2f, 0.1f };
+        float oneHeart = 0;
+        float twoHearts = 0;
+        float threeHearts = 0;
 
+        switch (balancingSystem.difficulty)
+        {
+            case BalancingSystem.Difficulty.easy:
+                oneHeart = (0.2f + (balancingSystem.grade - 1) * 0.075f);
+                twoHearts = (0.4f - (balancingSystem.grade - 1) * 0.025f);
+                threeHearts = (0.4f - (balancingSystem.grade - 1) * 0.05f);
+                endRewardWeights = new List<float>() { oneHeart, twoHearts, threeHearts };
+                break;
+
+            case BalancingSystem.Difficulty.medium:
+                oneHeart = (0.5f + (balancingSystem.grade - 5) * 0.05f);
+                twoHearts = (0.3f - (balancingSystem.grade - 5) * 0.025f);
+                threeHearts = (0.2f - (balancingSystem.grade - 5) * 0.025f);
+                endRewardWeights = new List<float>() { oneHeart, twoHearts, threeHearts };
+                break;
+
+            case BalancingSystem.Difficulty.hard:
+                oneHeart = (0.7f + (balancingSystem.grade - 9) * 0.05f);
+                twoHearts = (0.2f - (balancingSystem.grade - 9) * 0.025f);
+                threeHearts = (0.1f - (balancingSystem.grade - 9) * 0.025f);
+                endRewardWeights = new List<float>() { oneHeart, twoHearts, threeHearts };
+                break;
+        }
         //int rand = Random.Range(0, rewardPrefabs.Count);
 
-        GameObject go = Instantiate(rewardPrefabs[BalancingSystem.RandomWithWeight(list)], transform);
+        GameObject go = Instantiate(rewardPrefabs[BalancingSystem.RandomWithWeight(endRewardWeights)], transform);
         go.transform.localPosition = new Vector3(0, -0.8f, 0);
     }
 }

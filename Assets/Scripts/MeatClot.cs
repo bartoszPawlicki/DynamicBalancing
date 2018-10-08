@@ -43,14 +43,29 @@ public class MeatClot : EnemyController
 
         speedFactor = balancingSystem.difficultyLevel.meatClothSpeedFactor;
 
-        shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meathClothShootCooldown;
+        shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothShootCooldown;
         movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
         
 
         movementCooldown.InitCooldown();
         shootCooldown.InitCooldown();
+        
 
-        moveProbability = balancingSystem.difficultyLevel.moveProbability;
+        if (balancingSystem.grade >= 1 && balancingSystem.grade < 3)
+        {
+            float dashChance = ((balancingSystem.grade - 1) * 0.1f);
+            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+        }
+        if (balancingSystem.grade >= 3 && balancingSystem.grade <= 11)
+        {
+            float dashChance = (0.2f + (balancingSystem.grade - 3) * 0.075f);
+            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+        }
+        if (balancingSystem.grade > 11 && balancingSystem.grade <= 13)
+        {
+            float dashChance = (0.8f + (balancingSystem.grade - 11) * 0.1f);
+            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+        }
     }
 
     void Update ()
