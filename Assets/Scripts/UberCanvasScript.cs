@@ -49,6 +49,8 @@ public class UberCanvasScript : MonoBehaviour
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
+        
     }
 
     public void StartGameMedium()
@@ -57,6 +59,7 @@ public class UberCanvasScript : MonoBehaviour
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
     }
 
     public void StartGameHard()
@@ -65,6 +68,7 @@ public class UberCanvasScript : MonoBehaviour
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
     }
 
     public void StartGameTimer()

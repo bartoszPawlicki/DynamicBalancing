@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rigidbody;
-    public float speedFactor;
 
     [SerializeField]
+    private float playerAcceleration;
+
+    
     private float startHealth;
 
     [SerializeField]
@@ -19,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private float moveHorizontal = 0;
     private float moveVertical = 0;
+
+    [SerializeField]
     public float maxSpeed;
 
     private ParticleSystem damageParticles;
@@ -32,10 +36,21 @@ public class PlayerController : MonoBehaviour
     {
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
         rigidbody = GetComponent<Rigidbody>();
-        currentHealth = startHealth;
+
+        //startHealth = balancingSystem.difficultyLevel.startingLife;
+        
 
         damageParticles = GetComponentInChildren<ParticleSystem>();
         canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>();
+    }
+
+    public void UpdateDifficulty()
+    {
+        startHealth = balancingSystem.difficultyLevel.startingLife;
+        currentHealth = startHealth;
+        canvas.healthText.text = currentHealth.ToString();
+        playerAcceleration = balancingSystem.difficultyLevel.playerAcceleration;
+        maxSpeed = balancingSystem.difficultyLevel.maxPlayerSpeed;
     }
 
     void Update()
@@ -62,7 +77,7 @@ public class PlayerController : MonoBehaviour
                 //Vector3 movement = transform.position + new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
 
                 //rigidbody.AddForce(Mathf.Clamp(moveHorizontal * speedFactor, -20, 20), 0, Mathf.Clamp(moveVertical * speedFactor, -20, 20));
-                rigidbody.velocity += new Vector3(moveHorizontal, 0, moveVertical) * speedFactor;
+                rigidbody.velocity += new Vector3(moveHorizontal, 0, moveVertical) * playerAcceleration;
                 if (rigidbody.velocity.magnitude > maxSpeed)
                 {
                     rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
@@ -101,5 +116,7 @@ public class PlayerController : MonoBehaviour
         canvas.healthText.text = currentHealth.ToString();
         Debug.Log(currentHealth);
     }
+
+    
 
 }

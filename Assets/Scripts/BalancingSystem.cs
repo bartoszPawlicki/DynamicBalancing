@@ -24,7 +24,10 @@ public class BalancingSystem : MonoBehaviour
         easy = new Easy();
         medium = new Medium();
         hard = new Hard();
-	}
+
+        difficultyLevel = medium;
+
+    }
 
     public void InitWithDifficulty(Difficulty difficulty)
     {

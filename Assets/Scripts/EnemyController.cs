@@ -30,4 +30,9 @@ public class EnemyController : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    public virtual void DifficultyUpdate()
+    {
+
+    }
 }

@@ -13,10 +13,32 @@ public class FatEnemy : EnemyController
     {
 
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        currentHealth = startHealth;
-        attackCooldown.InitCooldown();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
 
+        //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        //currentHealth = startHealth;
+
+        //speedFactor = balancingSystem.difficultyLevel.fatEnemySpeedFactor;
+
+        //attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
+
+        //attackCooldown.InitCooldown();
+        
+
+
+
+    }
+
+    public override void DifficultyUpdate()
+    {
+        startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        currentHealth = startHealth;
+
+        speedFactor = balancingSystem.difficultyLevel.fatEnemySpeedFactor;
+
+        attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
+
+        attackCooldown.InitCooldown();
     }
 
 

@@ -13,14 +13,32 @@ public class MeatClot : EnemyController
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
+
+        //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        //currentHealth = startHealth;
+
+        //speedFactor = balancingSystem.difficultyLevel.meatClothSpeedFactor;
+
+        //shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meathClothShootCooldown;
+        //movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
+
+        //movementCooldown.InitCooldown();
+        //shootCooldown.InitCooldown();
+        
+    }
+
+    public override void DifficultyUpdate()
+    {
+        startHealth = balancingSystem.difficultyLevel.meatClothHealth;
         currentHealth = startHealth;
 
-        
+        speedFactor = balancingSystem.difficultyLevel.meatClothSpeedFactor;
 
+        shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meathClothShootCooldown;
+        movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
 
         movementCooldown.InitCooldown();
         shootCooldown.InitCooldown();
-        
     }
 
     void Update ()

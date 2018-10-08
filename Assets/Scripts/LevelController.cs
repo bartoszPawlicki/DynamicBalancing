@@ -95,7 +95,12 @@ public class LevelController : MonoBehaviour
             }
         }
 
+        foreach (EnemyController ec in enemies)
+        {
+            ec.DifficultyUpdate();
         }
+
+    }
 
     public void FinishLevel()
     {
