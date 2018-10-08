@@ -51,6 +51,7 @@ public class BalancingSystem : MonoBehaviour
                 grade = 9;
                 break;
         }
+        GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
     }
 
     void GradeUp()

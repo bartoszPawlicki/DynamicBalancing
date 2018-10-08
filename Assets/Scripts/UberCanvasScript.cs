@@ -47,29 +47,30 @@ public class UberCanvasScript : MonoBehaviour
     public void StartGameEasy()
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.easy);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
+        
         
     }
 
     public void StartGameMedium()
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.medium);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
     }
 
     public void StartGameHard()
     {
         balancingSystem.InitWithDifficulty(BalancingSystem.Difficulty.hard);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
         mainMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDirector>().startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
         StartGameTimer();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateDifficulty();
     }
 
     public void StartGameTimer()

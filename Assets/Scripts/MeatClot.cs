@@ -59,7 +59,16 @@ public class MeatClot : EnemyController
             }
             if (shootCooldown.canUse)
             {
-                Shoot();
+                
+                int rand = Random.Range(0, 2);
+                if (rand == 0)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    ShootWeak();   
+                }
             }
         }
         
@@ -77,5 +86,27 @@ public class MeatClot : EnemyController
         bullet1.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.right);
         bullet2.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.back);
         bullet3.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.forward);
+    }
+
+    void ShootWeak()
+    {
+        shootCooldown.startTimer();
+
+        int rand = Random.Range(0, 2);
+        if (rand == 0)
+        {
+            
+            GameObject bullet0 = bulletPool.PoolNext(transform.position + Vector3.left);
+            GameObject bullet1 = bulletPool.PoolNext(transform.position + Vector3.right);
+            bullet0.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.left);
+            bullet1.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.right);
+        }
+        else
+        {
+            GameObject bullet2 = bulletPool.PoolNext(transform.position + Vector3.back);
+            GameObject bullet3 = bulletPool.PoolNext(transform.position + Vector3.forward);
+            bullet2.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.back);
+            bullet3.GetComponent<EnemyBullet>().StartBulletMovement(Vector3.forward);
+        }
     }
 }

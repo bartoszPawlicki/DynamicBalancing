@@ -14,7 +14,7 @@ public class GameDirector : MonoBehaviour
 
     public void StartGame()
     {
-        startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
+        //startingLevel.StartLevel(DoorController.DoorLocation.RIGHT);
     }
 	
 	void Update ()

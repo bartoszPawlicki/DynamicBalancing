@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
 
         //startHealth = balancingSystem.difficultyLevel.startingLife;
-        
 
         damageParticles = GetComponentInChildren<ParticleSystem>();
         canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>();

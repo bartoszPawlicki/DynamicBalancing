@@ -6,6 +6,10 @@ public class FatEnemy : EnemyController
 {
     public float speedFactor;
     public Cooldown attackCooldown;
+    public bool isChasing = true;
+
+    public float chasingTotalTime = 4f;
+    public float chasingTimer;
 
     
 
@@ -14,7 +18,7 @@ public class FatEnemy : EnemyController
 
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
-
+        chasingTimer = chasingTotalTime;
         //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
         //currentHealth = startHealth;
 
@@ -23,7 +27,7 @@ public class FatEnemy : EnemyController
         //attackCooldown.cooldownTime = balancingSystem.difficultyLevel.fatEnemyAttackInterval;
 
         //attackCooldown.InitCooldown();
-        
+
 
 
 
@@ -49,12 +53,29 @@ public class FatEnemy : EnemyController
 
     void FixedUpdate()
     {
-        if (transform.parent.GetComponentInParent<LevelController>().delayOnLevelStartFinished)
+        if (isChasing)
         {
-            Vector3 movement = transform.position + (playerController.gameObject.transform.position - transform.position).normalized * speedFactor;
-            GetComponent<Rigidbody>().MovePosition(movement);
-        }
+            Chase();
+            chasingTimer -= Time.fixedDeltaTime;
+
+            if (chasingTimer < 0)
+            {
+                isChasing = false;
+                chasingTimer = 2f;
+                ConfusionDash();
+            }
             
+        }
+        else
+        {
+            Rest();
+            chasingTimer -= Time.fixedDeltaTime;
+            if (chasingTimer < 0)
+            {
+                isChasing = true;
+                chasingTimer = chasingTotalTime;
+            }
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -79,5 +100,24 @@ public class FatEnemy : EnemyController
                 collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(1);
             }
         }
+    }
+
+    void Chase()
+    {
+        if (transform.parent.GetComponentInParent<LevelController>().delayOnLevelStartFinished)
+        {
+            Vector3 movement = transform.position + (playerController.gameObject.transform.position - transform.position).normalized * speedFactor;
+            GetComponent<Rigidbody>().MovePosition(movement);
+        }
+    }
+
+    void Rest()
+    {
+
+    }
+
+    void ConfusionDash()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.position + (playerController.gameObject.transform.position - transform.position).normalized * -1100);
     }
 }
