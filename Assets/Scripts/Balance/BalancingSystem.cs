@@ -68,7 +68,6 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade++;
                 }
-                gradeDelta -= 1;
 
                 break;
             case Difficulty.medium:
@@ -76,7 +75,6 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade++;
                 }
-                gradeDelta += 1;
                 break;
             case Difficulty.hard:
                 if (grade >= 9 && grade < 13)
@@ -84,9 +82,10 @@ public class BalancingSystem : MonoBehaviour
                     grade++;
                 }
                 break;
-                gradeDelta += 1;
-        }
 
+                
+        }
+        gradeDelta -= 1;
 
     }
 
@@ -100,7 +99,7 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade--;
                 }
-                gradeDelta += 1;
+                
 
                 break;
             case Difficulty.medium:
@@ -108,16 +107,15 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade--;
                 }
-                gradeDelta += 1;
                 break;
             case Difficulty.hard:
                 if (grade > 9 && grade <= 13)
                 {
                     grade--;
                 }
-                gradeDelta += 1;
                 break;
         }
+        gradeDelta += 1;
     }
 
     public float startTime;
@@ -171,7 +169,7 @@ public class BalancingSystem : MonoBehaviour
             case Difficulty.easy:
                 healthBonus = (healthDelta * 0.4f);
                 
-                accBonus = (-0.1f + (bulletsHitEnd / bulletsFiredEnd) * 0.5f);
+                accBonus = (-0.1f + (bulletsHitEnd / bulletsFiredEnd) * 0.6f);
 
                 if ((endTime - startTime) > 60)
                 {
@@ -261,11 +259,7 @@ public class BalancingSystem : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
     }
-
-    void Update()
-    {
-
-    }
+    
 
     public static int RandomWithWeight(List<float> weights)
     {

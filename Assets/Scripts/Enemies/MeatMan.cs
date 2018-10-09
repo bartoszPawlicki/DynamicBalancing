@@ -53,18 +53,18 @@ public class MeatMan : EnemyController
 
         if (balancingSystem.grade >= 1 && balancingSystem.grade < 3)
         {
-            float dashChance = ((balancingSystem.grade - 1) * 0.1f);
-            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+            float moveChance = ((balancingSystem.grade - 1) * 0.1f);
+            moveProbability = new List<float>() { moveChance, 1f - moveChance };
         }
         if (balancingSystem.grade >= 3 && balancingSystem.grade <= 11)
         {
-            float dashChance = (0.2f + (balancingSystem.grade - 3) * 0.075f);
-            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+            float moveChance = (0.2f + (balancingSystem.grade - 3) * 0.075f);
+            moveProbability = new List<float>() { moveChance, 1f - moveChance };
         }
         if (balancingSystem.grade > 11 && balancingSystem.grade <= 13)
         {
-            float dashChance = (0.8f + (balancingSystem.grade - 11) * 0.1f);
-            moveProbability = new List<float>() { dashChance, 1f - dashChance };
+            float moveChance = (0.8f + (balancingSystem.grade - 11) * 0.1f);
+            moveProbability = new List<float>() { moveChance, 1f - moveChance };
         }
     }
 

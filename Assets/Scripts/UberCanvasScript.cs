@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UberCanvasScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UberCanvasScript : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI accucaryText;
     public TextMeshProUGUI gradeText;
+    public bool gameOver = false;
 
     public float startTime;
     private float currentTime;
@@ -19,6 +21,7 @@ public class UberCanvasScript : MonoBehaviour
 
     public GameObject mainMenu;
     public GameObject gameOverMenu;
+    public GameObject victoryMenu;
     public BalancingSystem balancingSystem;
 
     public bool timerStarted = false;
@@ -30,7 +33,7 @@ public class UberCanvasScript : MonoBehaviour
 	
 	void Update ()
     {
-        if(timerStarted)
+        if(timerStarted && !gameOver)
         {
             int minutes = (int)((Time.time - startTime) / 60);
             int seconds = (int)((Time.time - startTime) % 60);
@@ -86,6 +89,20 @@ public class UberCanvasScript : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverMenu.SetActive(true);
+        gameOver = true;
+        gradeText.gameObject.SetActive(true);
+    }
 
+    public void Victory()
+    {
+        victoryMenu.SetActive(true);
+        gameOver = true;
+        gradeText.gameObject.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

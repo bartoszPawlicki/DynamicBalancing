@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    public static int levelNumber = 0;
+
     public bool levelStarted = false;
     public bool levelFinished = false;
 
@@ -16,7 +18,10 @@ public class LevelController : MonoBehaviour
     public ObjectPool meatManPool;
     public ObjectPool fatEnemyPool;
     public List<float> enemySpawnWeights = new List<float>() { 0.8f, 0.2f };
-    public int enemiesCount = 5;
+
+
+
+    public int actualEnemyCount = 5;
 
     public List<GameObject> levelContents;
 
@@ -32,7 +37,7 @@ public class LevelController : MonoBehaviour
 
     public List<Transform> spawnPoints;
 
-	void Start ()
+    void Start()
     {
         foreach (DoorController door in doors)
         {
@@ -51,7 +56,7 @@ public class LevelController : MonoBehaviour
                 break;
 
             case BalancingSystem.Difficulty.medium:
-                float spawnWeight2 = ((balancingSystem.grade ) * 0.04f - 0.1f);
+                float spawnWeight2 = ((balancingSystem.grade) * 0.04f - 0.1f);
                 enemySpawnWeights = new List<float>() { 1f - spawnWeight2, spawnWeight2 };
                 break;
 
@@ -61,18 +66,18 @@ public class LevelController : MonoBehaviour
                 break;
         }
 
-        for (int i=0; i<enemiesCount; i++)
+        for (int i = 0; i < actualEnemyCount; i++)
         {
             int rand = BalancingSystem.RandomWithWeight(enemySpawnWeights);
 
-            if(rand == 0)
+            if (rand == 0)
             {
                 GameObject enemy = meatManPool.PoolNext(spawnPoints[0].position);
                 spawnPoints.RemoveAt(0);
                 enemy.transform.parent = transform.Find("Enemies");
                 enemies.Add(enemy.GetComponentInChildren<MeatMan>());
             }
-            else if(rand == 1)
+            else if (rand == 1)
             {
                 GameObject enemy = fatEnemyPool.PoolNext(spawnPoints[0].position);
                 spawnPoints.RemoveAt(0);
@@ -80,12 +85,12 @@ public class LevelController : MonoBehaviour
                 enemies.Add(enemy.GetComponentInChildren<FatEnemy>());
             }
         }
-        
+
     }
-	
-	void Update ()
+
+    void Update()
     {
-        if(!levelFinished)
+        if (!levelFinished)
         {
             bool allEnemiesDestroyed = true;
             foreach (EnemyController enemy in enemies)
@@ -102,23 +107,23 @@ public class LevelController : MonoBehaviour
                 FinishLevel();
             }
         }
-        if(levelStarted)
+        if (levelStarted)
         {
             delayOnLevelStartFinishedTimer -= Time.deltaTime;
-            if(delayOnLevelStartFinishedTimer <= 0 && !delayOnLevelStartFinished)
+            if (delayOnLevelStartFinishedTimer <= 0 && !delayOnLevelStartFinished)
             {
                 delayOnLevelStartFinished = true;
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked = false;
             }
         }
-        
-	}
+
+    }
 
     public void StartLevel(DoorController.DoorLocation exitDoorLocation)
     {
-        
+
         levelStarted = true;
-        
+
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamera>().MoveCameraToPosition(transform.position - GlobalConstants.CameraLevelOffset);
         Vector3 teleportPosition = Vector3.zero;
 
@@ -137,11 +142,88 @@ public class LevelController : MonoBehaviour
                 teleportPosition = transform.position + 8 * Vector3.left;
                 break;
         }
-        
+
         GameObject.FindGameObjectWithTag("Player").transform.position = teleportPosition;
 
         if (!levelFinished)
         {
+            levelNumber++;
+            actualEnemyCount = balancingSystem.difficultyLevel.baseEnemyCount[levelNumber - 1];
+
+            int diff = 0, rand = 0;
+
+            switch (balancingSystem.difficulty)
+            {
+                case BalancingSystem.Difficulty.easy:
+
+                    diff = 3 - balancingSystem.grade;
+
+                    if (diff > 0)
+                    {
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { diff / 2f, 1 - (diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount--;
+                        }
+                    }
+
+                    else if (diff < 0)
+                    {
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { -diff / 2f, 1 - (-diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount++;
+                        }
+                    }
+                    break;
+                case BalancingSystem.Difficulty.medium:
+                    diff = 7 - balancingSystem.grade;
+
+                    
+
+                    if (diff > 0)
+                    {
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { diff / 2f, 1 - (diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount--;
+                        }
+                    }
+
+                    else if (diff < 0)
+                    {
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { -diff / 2f, 1 - (-diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount++;
+                        }
+                    }
+                    break;
+                case BalancingSystem.Difficulty.hard:
+                    diff = 11 - balancingSystem.grade;
+
+                    if (diff > 0)
+                    {
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { diff / 2f, 1 - (diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount--;
+                        }
+                    }
+
+                    else if (diff < 0)
+                    {
+                        
+                        rand = BalancingSystem.RandomWithWeight(new List<float>() { -diff / 2f, 1 - (-diff / 2f) });
+                        if (rand == 0)
+                        {
+                            actualEnemyCount++;
+                        }
+                    }
+                    break;
+            }
+            Debug.Log(rand);
+
             SpawnRandomEnemies();
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().locked = true;
             foreach (DoorController door in doors)
@@ -156,14 +238,19 @@ public class LevelController : MonoBehaviour
             ec.DifficultyUpdate();
         }
 
-        
 
+        Debug.Log(levelNumber);
     }
 
     public void FinishLevel()
     {
         levelFinished = true;
         SpawnEndLevelReward();
+
+        if (levelNumber == 8)
+        {
+            GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().Victory();
+        }
 
         foreach (DoorController door in doors)
         {

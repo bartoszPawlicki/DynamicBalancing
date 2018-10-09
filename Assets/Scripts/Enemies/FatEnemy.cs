@@ -70,8 +70,6 @@ public class FatEnemy : EnemyController
             float dashChance = (0.8f + (balancingSystem.grade - 11) * 0.1f);
             dashProbability = new List<float>() { dashChance, 1f - dashChance };
         }
-
-
     }
 
 

@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
 
-    public float bulletSpeed;
+    private float bulletSpeed;
 
     public void StartBulletMovement(Vector3 direction)
     {
+        bulletSpeed = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>().difficultyLevel.enemyBulletSpeed;
+
 
         Vector3 dir = direction.normalized;
         GetComponent<Rigidbody>().AddForce(dir.normalized * bulletSpeed);

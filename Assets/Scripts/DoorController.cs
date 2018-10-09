@@ -31,12 +31,14 @@ public class DoorController : MonoBehaviour
         open = true;
         if(doorLocation == DoorLocation.DOWN)
         {
-
+            GetComponent<Renderer>().enabled = false;
         }
+        
     }
     public void CloseDoor()
     {
         transform.position += Vector3.down * 3;
         open = false;
+        
     }
 }
