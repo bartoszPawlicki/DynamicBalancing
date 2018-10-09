@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour
 
     public List<GameObject> enemiesPrefabs;
 
-    public ObjectPool meatClotPool;
+    public ObjectPool meatManPool;
     public ObjectPool fatEnemyPool;
     public List<float> enemySpawnWeights = new List<float>() { 0.8f, 0.2f };
     public int enemiesCount = 5;
@@ -67,10 +67,10 @@ public class LevelController : MonoBehaviour
 
             if(rand == 0)
             {
-                GameObject enemy = meatClotPool.PoolNext(spawnPoints[0].position);
+                GameObject enemy = meatManPool.PoolNext(spawnPoints[0].position);
                 spawnPoints.RemoveAt(0);
                 enemy.transform.parent = transform.Find("Enemies");
-                enemies.Add(enemy.GetComponentInChildren<MeatClot>());
+                enemies.Add(enemy.GetComponentInChildren<MeatMan>());
             }
             else if(rand == 1)
             {

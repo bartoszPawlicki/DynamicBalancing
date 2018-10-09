@@ -9,6 +9,7 @@ public class BalancingSystem : MonoBehaviour
         easy, medium, hard
     }
     public int grade;
+    public float gradeDelta = 0;
 
     public Easy easy;
     public Medium medium;
@@ -18,10 +19,11 @@ public class BalancingSystem : MonoBehaviour
     public Difficulty difficulty;
 
     private PlayerController playerController;
+    private UberCanvasScript canvas;
 
 
 
-	void Start ()
+    void Start()
     {
         easy = new Easy();
         medium = new Medium();
@@ -29,6 +31,8 @@ public class BalancingSystem : MonoBehaviour
 
         difficultyLevel = medium;
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>();
 
     }
 
@@ -51,7 +55,7 @@ public class BalancingSystem : MonoBehaviour
                 grade = 11;
                 break;
         }
-        GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
+        canvas.gradeText.text = grade.ToString();
     }
 
     void GradeUp()
@@ -59,11 +63,12 @@ public class BalancingSystem : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.easy:
-                
+
                 if (grade >= 1 && grade < 5)
                 {
                     grade++;
                 }
+                gradeDelta -= 1;
 
                 break;
             case Difficulty.medium:
@@ -71,6 +76,7 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade++;
                 }
+                gradeDelta += 1;
                 break;
             case Difficulty.hard:
                 if (grade >= 9 && grade < 13)
@@ -78,6 +84,7 @@ public class BalancingSystem : MonoBehaviour
                     grade++;
                 }
                 break;
+                gradeDelta += 1;
         }
 
 
@@ -93,6 +100,7 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade--;
                 }
+                gradeDelta += 1;
 
                 break;
             case Difficulty.medium:
@@ -100,12 +108,14 @@ public class BalancingSystem : MonoBehaviour
                 {
                     grade--;
                 }
+                gradeDelta += 1;
                 break;
             case Difficulty.hard:
                 if (grade > 9 && grade <= 13)
                 {
                     grade--;
                 }
+                gradeDelta += 1;
                 break;
         }
     }
@@ -118,19 +128,26 @@ public class BalancingSystem : MonoBehaviour
     public float endAccuracy;
     public float endHealth;
 
+    public float bulletsHitStart;
+    public float bulletsHitEnd;
+    public float bulletsFiredStart;
+    public float bulletsFiredEnd;
 
 
     public void StartGrading()
     {
-        startTime = Time.time - GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().startTime;
-        this.startAccuracy = startAccuracy;
+        startTime = Time.time - canvas.startTime;
+        bulletsHitStart = canvas.bulletsHit;
+        bulletsFiredStart = canvas.bulletsShot;
 
         startHealth = playerController.currentHealth;
     }
 
     public void EndGrading()
     {
-        this.endAccuracy = endAccuracy;
+        bulletsHitEnd = canvas.bulletsHit - bulletsHitStart;
+        bulletsFiredEnd = canvas.bulletsShot - bulletsFiredStart;
+
         endHealth = playerController.currentHealth;
 
         endTime = Time.time;
@@ -140,21 +157,95 @@ public class BalancingSystem : MonoBehaviour
 
     public void GradePlayer()
     {
-        float gradeDelta = 0;
+
+        float healthDelta = (endHealth - startHealth);
+
+        float timeBonus = 0;
+        float healthBonus = 0;
+        float accBonus = 0;
+
+        Debug.Log(endTime - startTime);
 
         switch (difficulty)
         {
             case Difficulty.easy:
-                gradeDelta += ((endHealth - startHealth)*0.4f);
+                healthBonus = (healthDelta * 0.4f);
                 
+                accBonus = (-0.1f + (bulletsHitEnd / bulletsFiredEnd) * 0.5f);
+
+                if ((endTime - startTime) > 60)
+                {
+                    timeBonus = -0.6f;
+                }
+                else
+                {
+                    timeBonus = (0.5f - (endTime - startTime) / 60f);
+                }
+
+
+                if (healthDelta != 0)
+                {
+                    timeBonus /= (healthDelta * -1);
+                    accBonus /= (healthDelta * -1);
+                }
+                gradeDelta += timeBonus + accBonus + healthBonus;
+                Debug.Log("timeBonus: " + timeBonus + " accBonus: " + accBonus + " healthBonus: " + healthBonus + " gradeDelta: " + gradeDelta);
+
+                
+
                 break;
 
             case Difficulty.medium:
-                gradeDelta += ((endHealth - startHealth) * 0.5f);
+                healthBonus = (healthDelta * 0.5f);
+                
+                accBonus = (-0.1f + (bulletsHitEnd / bulletsFiredEnd) * 0.5f);
+
+                if ((endTime - startTime) > 60)
+                {
+                    timeBonus = -0.6f;
+                }
+                else
+                {
+                    timeBonus = (0.5f - (endTime - startTime) / 60f);
+                }
+
+
+                if (healthDelta != 0)
+                {
+                    timeBonus /= (healthDelta * -1);
+                    accBonus /= (healthDelta * -1);
+                }
+                gradeDelta += timeBonus + accBonus + healthBonus;
+                Debug.Log("timeBonus: " + timeBonus + " accBonus: " + accBonus + " healthBonus: " + healthBonus + " gradeDelta: " + gradeDelta);
+
+                
+
                 break;
 
             case Difficulty.hard:
-                gradeDelta += ((endHealth - startHealth) * 1f);
+                healthBonus = (healthDelta * 0.6f);
+                
+                accBonus = (-0.1f + (bulletsHitEnd / bulletsFiredEnd) * 0.5f);
+
+                if ((endTime - startTime) > 60)
+                {
+                    timeBonus = -0.6f;
+                }
+                else
+                {
+                    timeBonus = (0.5f - (endTime - startTime) / 60f);
+                }
+
+
+                if (healthDelta != 0)
+                {
+                    timeBonus /= (healthDelta * -1);
+                    accBonus /= (healthDelta * -1);
+                }
+                gradeDelta += timeBonus + accBonus + healthBonus;
+                Debug.Log("timeBonus: " + timeBonus + " accBonus: " + accBonus + " healthBonus: " + healthBonus + " gradeDelta: " + gradeDelta);
+
+                
 
                 break;
         }
@@ -163,7 +254,7 @@ public class BalancingSystem : MonoBehaviour
         {
             GradeDown();
         }
-        if (gradeDelta == 0)
+        if (gradeDelta >= 1f)
         {
             GradeUp();
         }
@@ -171,18 +262,18 @@ public class BalancingSystem : MonoBehaviour
         GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<UberCanvasScript>().gradeText.text = grade.ToString();
     }
 
-	void Update ()
+    void Update()
     {
-		
-	}
-    
+
+    }
+
     public static int RandomWithWeight(List<float> weights)
     {
         float rand = Random.Range(0f, 1f);
-        Debug.Log(rand);
+        //Debug.Log(rand);
         float totalWeights = 0;
 
-        for (int i=0; i<weights.Count; i++)
+        for (int i = 0; i < weights.Count; i++)
         {
             totalWeights += weights[i];
             if (rand <= totalWeights)

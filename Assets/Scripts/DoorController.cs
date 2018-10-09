@@ -17,8 +17,8 @@ public class DoorController : MonoBehaviour
 
     void Start ()
     {
-		
-	}
+
+    }
 	
 	void Update ()
     {
@@ -29,6 +29,10 @@ public class DoorController : MonoBehaviour
     {
         transform.position += Vector3.up * 3;
         open = true;
+        if(doorLocation == DoorLocation.DOWN)
+        {
+
+        }
     }
     public void CloseDoor()
     {

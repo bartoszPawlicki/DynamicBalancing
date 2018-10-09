@@ -6,17 +6,17 @@ public class Medium : DifficultyLevel
 {
     public Medium()
     {
-        startingLife = 5;
+        startingLife = 6;
         maxPlayerSpeed = 11;
-        playerAcceleration = 1.7f;
-        attackCooldown = 0.4f;
+        playerAcceleration = 10f;
+        attackCooldown = 0.35f;
         bulletSpeed = 1000;
         bulletWeight = 1;
 
-        meatClothHealth = 3;
-        meatClothSpeedFactor = 800;
-        meatClothMoveCooldown = 1.5f;
-        meatClothShootCooldown = 2f;
+        meatManhHealth = 3;
+        meatManhSpeedFactor = 800;
+        meatManhMoveCooldown = 1.5f;
+        meatManhShootCooldown = 2f;
 
         fatEnemyHealth = 3;
         fatEnemySpeedFactor = 0.15f;

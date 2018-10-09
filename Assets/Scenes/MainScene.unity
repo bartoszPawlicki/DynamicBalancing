@@ -429,12 +429,12 @@ MonoBehaviour:
   - {fileID: 2074946897}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 60003436}
+  meatManPool: {fileID: 60003436}
   fatEnemyPool: {fileID: 60003437}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 1091110659}
   - {fileID: 955069595}
@@ -2186,38 +2186,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 307435606}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &314295406 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1004381168837582, guid: d1125b50f9b90424bbfdc119bed3b3ac,
-    type: 2}
-  m_PrefabInternal: {fileID: 1159290715}
---- !u!114 &314295407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 314295406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ca76555858b524da2495ea76953b2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1487734071471402, guid: a55967cac118aed42b8331825afc5f6b,
-    type: 2}
-  numberOfObjects: 5
-  pooledObjects: []
---- !u!114 &314295408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 314295406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 149006a1fddfcaf44ac07dddc352d4e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 5
 --- !u!1 &348451712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,6 +2507,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 355561042}
   m_CullTransparentMesh: 0
+--- !u!114 &359357836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114672728130179752, guid: 17376fb81247f5d40ba1b68f21d248d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1038935633}
+  m_Script: {fileID: 11500000, guid: 37ca76555858b524da2495ea76953b2c, type: 3}
 --- !u!1 &365463412
 GameObject:
   m_ObjectHideFlags: 0
@@ -4380,12 +4354,12 @@ MonoBehaviour:
   - {fileID: 33242318}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 706172845}
+  meatManPool: {fileID: 706172845}
   fatEnemyPool: {fileID: 706172846}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 1965337967}
   - {fileID: 1072701836}
@@ -4686,12 +4660,12 @@ MonoBehaviour:
   - {fileID: 954037370}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 728665360}
+  meatManPool: {fileID: 728665360}
   fatEnemyPool: {fileID: 728665361}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 1028437607}
   - {fileID: 1807257857}
@@ -6167,12 +6141,12 @@ MonoBehaviour:
   - {fileID: 546003702}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 898597755}
+  meatManPool: {fileID: 898597755}
   fatEnemyPool: {fileID: 898597756}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 786958552}
   - {fileID: 1545313159}
@@ -6491,12 +6465,12 @@ MonoBehaviour:
   - {fileID: 1280861820}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 928762952}
+  meatManPool: {fileID: 928762952}
   fatEnemyPool: {fileID: 928762953}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 434077065}
   - {fileID: 1407666401}
@@ -6532,7 +6506,7 @@ Transform:
   - {fileID: 83656461}
   - {fileID: 1402938956}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &954037368
 GameObject:
@@ -7560,6 +7534,28 @@ Prefab:
       propertyPath: nextRoomDoor
       value: 
       objectReference: {fileID: 1280861820}
+    - target: {fileID: 4323765713643924, guid: 17376fb81247f5d40ba1b68f21d248d5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663268760167662, guid: 17376fb81247f5d40ba1b68f21d248d5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219212840972074, guid: 17376fb81247f5d40ba1b68f21d248d5, type: 2}
+      propertyPath: m_Name
+      value: ShortWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 114101275537737098, guid: 17376fb81247f5d40ba1b68f21d248d5,
+        type: 2}
+      propertyPath: meatManPool
+      value: 
+      objectReference: {fileID: 359357836}
+    - target: {fileID: 114101275537737098, guid: 17376fb81247f5d40ba1b68f21d248d5,
+        type: 2}
+      propertyPath: enemiesCount
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17376fb81247f5d40ba1b68f21d248d5, type: 2}
   m_IsPrefabAsset: 0
@@ -8299,7 +8295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1158626003
 GameObject:
@@ -8430,16 +8426,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114667091494551042, guid: d1125b50f9b90424bbfdc119bed3b3ac,
-        type: 2}
-      propertyPath: rocketPool
-      value: 
-      objectReference: {fileID: 314295407}
-    - target: {fileID: 114667091494551042, guid: d1125b50f9b90424bbfdc119bed3b3ac,
-        type: 2}
-      propertyPath: rocketCooldown
-      value: 
-      objectReference: {fileID: 314295408}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1125b50f9b90424bbfdc119bed3b3ac, type: 2}
   m_IsPrefabAsset: 0
@@ -11563,12 +11549,12 @@ MonoBehaviour:
   - {fileID: 1999844405}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 1579130610}
+  meatManPool: {fileID: 1579130610}
   fatEnemyPool: {fileID: 1579130611}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 514353862}
   - {fileID: 1684293273}
@@ -11801,12 +11787,12 @@ MonoBehaviour:
   - {fileID: 843304716}
   enemies: []
   enemiesPrefabs: []
-  meatClotPool: {fileID: 1611681731}
+  meatManPool: {fileID: 1611681731}
   fatEnemyPool: {fileID: 1611681732}
   enemySpawnWeights:
   - 0.8
   - 0.2
-  enemiesCount: 5
+  enemiesCount: 4
   levelContents:
   - {fileID: 1859002941}
   - {fileID: 742774837}
@@ -12557,6 +12543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grade: 0
+  gradeDelta: 0
   difficulty: 0
   startTime: 0
   startAccuracy: 0
@@ -12564,6 +12551,10 @@ MonoBehaviour:
   endTime: 0
   endAccuracy: 0
   endHealth: 0
+  bulletsHitStart: 0
+  bulletsHitEnd: 0
+  bulletsFiredStart: 0
+  bulletsFiredEnd: 0
 --- !u!1 &1752046589
 GameObject:
   m_ObjectHideFlags: 0

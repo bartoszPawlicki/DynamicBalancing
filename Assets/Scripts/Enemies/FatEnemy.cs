@@ -20,7 +20,7 @@ public class FatEnemy : EnemyController
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
         
-        //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        //startHealth = balancingSystem.difficultyLevel.meatManhHealth;
         //currentHealth = startHealth;
 
         //speedFactor = balancingSystem.difficultyLevel.fatEnemySpeedFactor;
@@ -40,7 +40,7 @@ public class FatEnemy : EnemyController
 
     public override void DifficultyUpdate()
     {
-        startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        startHealth = balancingSystem.difficultyLevel.meatManhHealth;
         currentHealth = startHealth;
 
         speedFactor = balancingSystem.difficultyLevel.fatEnemySpeedFactor;

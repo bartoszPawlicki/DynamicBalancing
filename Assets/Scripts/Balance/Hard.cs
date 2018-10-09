@@ -6,17 +6,17 @@ public class Hard : DifficultyLevel
 {
     public Hard()
     {
-        startingLife = 3;
+        startingLife = 4;
         maxPlayerSpeed = 11;
-        playerAcceleration = 1.5f;
-        attackCooldown = 0.5f;
+        playerAcceleration = 10f;
+        attackCooldown = 0.4f;
         bulletSpeed = 900;
         bulletWeight = 1;
 
-        meatClothHealth = 5;
-        meatClothSpeedFactor = 900;
-        meatClothMoveCooldown = 1.2f;
-        meatClothShootCooldown = 1.6f;
+        meatManhHealth = 5;
+        meatManhSpeedFactor = 950;
+        meatManhMoveCooldown = 1.2f;
+        meatManhShootCooldown = 1.6f;
 
         fatEnemyHealth = 4;
         fatEnemySpeedFactor = 0.15f;

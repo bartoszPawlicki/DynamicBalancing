@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 1244679942134526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4439677063219878}
   m_RootOrder: 0
@@ -159,8 +159,10 @@ MonoBehaviour:
   speedFactor: 0.15
   attackCooldown: {fileID: 114398506450496228}
   isChasing: 0
-  chasingTotalTime: 4
   chasingTimer: 0
+  chaseTime: 0
+  restTime: 0
+  dashProbability: []
 --- !u!136 &136885432830290108
 CapsuleCollider:
   m_ObjectHideFlags: 1

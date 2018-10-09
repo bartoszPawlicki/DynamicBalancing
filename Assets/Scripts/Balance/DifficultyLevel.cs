@@ -11,10 +11,10 @@ public abstract class DifficultyLevel
     public float bulletSpeed = 1000;
     public float bulletWeight = 1;
 
-    public int meatClothHealth = 3;
-    public float meatClothSpeedFactor = 800;
-    public float meatClothMoveCooldown = 1.5f;
-    public float meatClothShootCooldown = 2f;
+    public int meatManhHealth = 3;
+    public float meatManhSpeedFactor = 800;
+    public float meatManhMoveCooldown = 1.5f;
+    public float meatManhShootCooldown = 2f;
 
     public int fatEnemyHealth = 3;
     public float fatEnemySpeedFactor = 0.15f;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeatClot : EnemyController
+public class MeatMan : EnemyController
 {
     public float speedFactor;
     public Cooldown movementCooldown;
@@ -17,13 +17,13 @@ public class MeatClot : EnemyController
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         balancingSystem = GameObject.FindGameObjectWithTag("GameController").GetComponent<BalancingSystem>();
 
-        //startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        //startHealth = balancingSystem.difficultyLevel.meatManhHealth;
         //currentHealth = startHealth;
 
-        //speedFactor = balancingSystem.difficultyLevel.meatClothSpeedFactor;
+        //speedFactor = balancingSystem.difficultyLevel.meatManhSpeedFactor;
 
         //shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meathClothShootCooldown;
-        //movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
+        //movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatManhMoveCooldown;
 
         //movementCooldown.InitCooldown();
         //shootCooldown.InitCooldown();
@@ -38,13 +38,13 @@ public class MeatClot : EnemyController
 
     public override void DifficultyUpdate()
     {
-        startHealth = balancingSystem.difficultyLevel.meatClothHealth;
+        startHealth = balancingSystem.difficultyLevel.meatManhHealth;
         currentHealth = startHealth;
 
-        speedFactor = balancingSystem.difficultyLevel.meatClothSpeedFactor;
+        speedFactor = balancingSystem.difficultyLevel.meatManhSpeedFactor;
 
-        shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothShootCooldown;
-        movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatClothMoveCooldown;
+        shootCooldown.cooldownTime = balancingSystem.difficultyLevel.meatManhShootCooldown;
+        movementCooldown.cooldownTime = balancingSystem.difficultyLevel.meatManhMoveCooldown;
         
 
         movementCooldown.InitCooldown();
